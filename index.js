@@ -60,7 +60,7 @@ async function run() {
       res.json(result);
     });
 
-    //POST review api
+    //post review api
     app.post("/reviews", async (req, res) => {
       const newReview = req.body;
       const result = await reviewsCollection.insertOne(newReview);
@@ -76,7 +76,7 @@ async function run() {
       res.json(result);
     });
 
-    //get api for single user
+    //get order api for single user
     app.get("/orders/:byEmail", async (req, res) => {
       const email = req.params.byEmail;
       const query = { email };
@@ -126,6 +126,14 @@ async function run() {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await ordersCollection.deleteOne(query);
+      res.json(result);
+    });
+
+    //DELETE API
+    app.delete("/products/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productsCollection.deleteOne(query);
       res.json(result);
     });
   } finally {
